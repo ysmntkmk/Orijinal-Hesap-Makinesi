@@ -81,8 +81,28 @@ export default function App() {
   
 Hesap makinesinin çalışmasını sağlamak için *sadece* aşağıdaki üç görevi tamamlamanız ve her görev için *sadece* geçerli currentCalc state'ini güncellemeniz gerekir! */
 
-    if (numFromClick) {
-      if (conditionOne || conditionTwo || conditionThree || conditionFour) {
+if (numFromClick) {
+  if (conditionOne || conditionTwo || conditionThree || conditionFour) {
+    setCurrentCalc((prevCalc) => ({
+      ...prevCalc,
+      currentNum: [...prevCalc.currentNum, numFromClick], // Sayıyı currentNum dizisine ekliyoruz
+    }));
+  } else if (conditionFive) {
+    setCurrentCalc((prevCalc) => ({
+      previousNum: prevCalc.result, // Önceki sonucu previousNum'a taşıyoruz
+      currentNum: [numFromClick], // Yeni sayıyı currentNum dizisine ekliyoruz
+      result: [], // Sonuç dizisini sıfırlıyoruz
+      operation: prevCalc.operation, // Mevcut işlem korunsun
+    }));
+  } else if (conditionSix) {
+    setCurrentCalc((prevCalc) => ({
+      ...prevCalc,
+      previousNum: prevCalc.result, // Sonucu previousNum dizisine taşıyoruz
+      result: [], // Sonuç dizisini boşaltıyoruz
+      currentNum: [numFromClick], // Yeni sayıyı currentNum dizisine ekliyoruz
+    }));
+  }
+        
         /* Görev 1/3 - Bir Sayı Oluşturma 
   
       a. numFromClick değeri, currentCalc'ın currentNum array'inin sonuna eklenmeli ve array'de zaten kayıtlı olan değerler korunmalıdır. 
@@ -92,6 +112,11 @@ Hesap makinesinin çalışmasını sağlamak için *sadece* aşağıdaki üç g�
 ---------------Aşağıdaki 1. görev için kodunuzu yazın.------------------------------------------------*/
         /*-------------Yukarıdaki 1. görev için kodunuzu yazın.------------------------------------------------*/
       } else if (conditionFive) {
+        setCurrentCalc((prevCalc) => ({
+          ...INITIAL_STATE, // INITIAL_STATE'e sıfırlıyoruz
+          currentNum: [numFromClick], // Sadece yeni sayıyı ekliyoruz
+        }));
+      
         /* Görev 2/3 - Yeni Bir Hesaplama Başlatmak
             
       a. numFromClick değeri currentCalc'ın currentNum array'ine eklenmelidir. Dizideki önceki değerler *korunmamalıdır* - numFromClick değeri dizideki *tek* değer haline gelmelidir. 
@@ -101,6 +126,13 @@ Hesap makinesinin çalışmasını sağlamak için *sadece* aşağıdaki üç g�
 ---------------Aşağıdaki 2. görev için kodunuzu yazın.------------------------------------------------*/
         /*-------------Yukarıdaki 2. görev için kodunuzu yazın.------------------------------------------------*/
       } else if (conditionSix) {
+        setCurrentCalc((prevCalc) => ({
+          ...prevCalc,
+          previousNum: prevCalc.result, // Sonucu previousNum dizisine taşıyoruz
+          result: [], // Sonuç dizisini sıfırlıyoruz
+          currentNum: [numFromClick], // Yeni sayıyı currentNum dizisine ekliyoruz
+          operation: prevCalc.operation, // İşlem korunuyor
+        }));
         /* Görev 3/3 - Hesaplamaya Devam Etme 
             
       a. currentCalc'ın sonuç array'ine kaydedilen değer, boş previousNum array'ine eklenmeli ve sonuç array'i boş hale getirilmelidir. Başka bir deyişle:
@@ -115,10 +147,9 @@ Hesap makinesinin çalışmasını sağlamak için *sadece* aşağıdaki üç g�
                 
       c. operation değeri (bir string) korunmalıdır. 
                        
----------------Aşağıdaki 3. görev için kodunuzu yazın.------------------------------------------------*/
+              /*---------------Aşağıdaki 3. görev için kodunuzu yazın.------------------------------------------------*/
         /*-------------Yukarıdaki 3. görev için kodunuzu yazın.------------------------------------------------*/
-      }
-    } else if (opFromClick) {
+      }else if (opFromClick) {
       /* 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 SPOILER UYARISI 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨   
         
         
